@@ -10,3 +10,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/home', 'HomeController@index');
     });
 });
+
+Route::get('/app', function () {
+    return view('layouts.spa');
+});
