@@ -11,7 +11,7 @@
         <footer class="page-footer">
             <div class="footer-copyright">
                 <div class="container">
-                    &copy; {{ year  }} <a href="http://code.education" class="grey-text text-lighten-4">Code Education</a>
+                    &copy; {{ year  }} <a href="#" class="grey-text text-lighten-4">Financeiro</a>
                 </div>
             </div>
         </footer>
