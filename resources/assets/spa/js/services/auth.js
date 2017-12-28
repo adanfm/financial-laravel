@@ -3,7 +3,8 @@ import LocalStorage from './localStorage';
 import {Jwt, User} from "./resources";
 
 const USER  = 'user' ;
-const afterLogin = (response) => {
+const afterLogin = function(response) {
+    this.user.check = true;
     User.get().then((response) => {
         this.user.data = response.data;
     });
@@ -30,7 +31,8 @@ export default {
     },
     login(email, password) {
         return JwtToken.accessToken(email,password).then((response) => {
-            afterLogin(response);
+            let afterLoginContext = afterLogin.bind(this);
+            afterLoginContext(response);
             return response;
         });
     },
@@ -41,6 +43,7 @@ export default {
         ;
     },
     clearAuth() {
-        LocalStorage.remove(USER);
+        this.user.data = null;
+        this.user.check = false;
     }
 }

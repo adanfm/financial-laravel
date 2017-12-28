@@ -1,7 +1,6 @@
 import {Jwt} from "./resources";
 import LocalStorage from './localStorage';
 
-
 const TOKEN = 'token';
 
 export default {

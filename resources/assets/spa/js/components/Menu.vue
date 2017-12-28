@@ -42,6 +42,7 @@
 </template>
 
 <script type="text/javascript">
+    import Auth from '../services/auth';
 
     export default {
         data(){
@@ -58,12 +59,18 @@
                             {name: 'Criar contas', routeName: 'auth.login'}
                         ]
                     }
-                ]
+                ],
+                user: Auth.user
             }
         },
         ready() {
             $('.button-collapse').sideNav();
             $('.dropdown-button').dropdown();
+        },
+        computed: {
+            name() {
+                return this.user.data ? this.user.data.name : ''
+            }
         }
     }
 </script>
