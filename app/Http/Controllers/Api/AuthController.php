@@ -93,6 +93,6 @@ class AuthController extends Controller
     {
         return response()->json([
             'message'   => Lang::get('auth.failed')
-        ], 401);
+        ], 400);
     }
 }
