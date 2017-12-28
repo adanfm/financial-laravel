@@ -1,7 +1,7 @@
 <template>
-    <div id="app">
-        <header>
-
+    <div id="isAuth">
+        <header v-if="Auth">
+            <menu></menu>
         </header>
 
         <main>
@@ -20,7 +20,11 @@
 </template>
 
 <script type="text/javascript">
+    import MenuComponent from './Menu.vue';
     export default {
+        components: {
+            'menu': MenuComponent
+        },
         data() {
             return {
                 year: new Date().getFullYear()

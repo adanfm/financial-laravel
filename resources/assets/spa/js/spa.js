@@ -7,7 +7,6 @@ Vue.http.options.root = appConfig.api_url;
 
 require('./services/interceptors');
 require('./router');
-
 /*
     window.localStorage.setItem('nome','valor');
     window.localStorage.setItem('nome','alterar_valor');
