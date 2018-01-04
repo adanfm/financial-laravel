@@ -10,6 +10,8 @@ const env = require('gulp-env');
 const stringifyObject = require('stringify-object');
 const file = require('gulp-file');
 
+const HOST = '127.0.0.1';
+
 /*
 require('laravel-elixir-vue');
 require('laravel-elixir-webpack-official');
@@ -48,7 +50,7 @@ gulp.task('webpack-dev-server', () => {
 
     let inlineHot = [
         'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://127.0.0.1:8080'
+        `webpack-dev-server/client?http://${HOST}:8080`
     ];
 
     config.entry.admin = [
@@ -62,7 +64,7 @@ gulp.task('webpack-dev-server', () => {
     new WebpackDevServer(webpack(config),{
         hot: true,
         proxy: {
-            '*': 'http://127.0.0.1'
+            '*': `http://${HOST}`
         },
         watchOptions: {
             poll: true,
@@ -86,7 +88,7 @@ elixir(mix => {
     gulp.start('spa-config', 'webpack-dev-server');
 
     mix.browserSync({
-        host: '0.0.0.0',
-        proxy: 'http://127.0.0.1:8080'
+        host: HOST,
+        proxy: `http://${HOST}:8080`
     });
 });
