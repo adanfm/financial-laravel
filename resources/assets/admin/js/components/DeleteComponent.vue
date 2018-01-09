@@ -1,27 +1,30 @@
 <template>
-    <form method="POST" :action="action" :id="`form_item_delete_${idItem}`">
+    <slot></slot>
+    <form method="POST" :action="action" :id="id">
         <input type="hidden" name="_method" value="DELETE" />
         <input type="hidden" name="_token" :value="csrfToken">
     </form>
-    <a class="link-delete" :data-id="idItem" href="#">Excluir</a>
 </template>
 <script type="text/javascript">
     export default {
-        props: ['action', 'csrfToken', 'idItem'],
+        props: ['action', 'csrfToken', 'actionElement'],
+        computed: {
+            id() {
+                return `form-delete-action_${this.actionElement}`
+            }
+        },
         ready(){
+            let actionElement = this.actionElement, formId = this.id;
             $(document).ready(() => {
-                $('.link-delete').on('click',(event) => {
-                    event.preventDefault();
-                    let idForm = `#form_item_delete_${this.idItem}`;
-                    let answer = confirm('Você deseja mesmo remover este registro?');
-                    if (answer) {
-                        $(idForm).submit();
-                    }
-                })
+                $(`#${actionElement}`).on('click',(event) => {
+                    $(`#${formId}`).submit();
+                });
             })
         }
     }
 </script>
-<style>
-
+<style type="text/css" scoped>
+    form {
+        display: none;
+    }
 </style>
