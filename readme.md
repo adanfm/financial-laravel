@@ -34,3 +34,8 @@ Executando com o artisan serve
 ```bash
 php artisan serve --port=80
 ```
+
+Criando o link do storage
+```bash
+php artisan storage:link
+```

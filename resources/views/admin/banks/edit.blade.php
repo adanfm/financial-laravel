@@ -7,6 +7,7 @@
             {!! Form::model($bank,[
                 'route' => ['admin.banks.update', 'bank' => $bank->id],
                 'method' => 'PUT',
+                'files' => true
                 ]) !!}
                 @include('admin.banks._form')
                 <div class="row">

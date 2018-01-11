@@ -2,9 +2,11 @@
 
 namespace CodeFin\Http\Controllers\Admin;
 
+use CodeFin\Events\BankCreatedEvent;
 use CodeFin\Http\Controllers\Controller;
 use CodeFin\Http\Controllers\Response;
 
+use CodeFin\Models\Bank;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use CodeFin\Http\Requests\BankCreateRequest;
@@ -57,8 +59,6 @@ class BanksController extends Controller
     public function store(BankCreateRequest $request)
     {
         $data = $request->all();
-        $data['logo'] = md5(time()). '.jpeg';
-
         $this->repository->create($data);
 
         return redirect()->route('admin.banks.index');
