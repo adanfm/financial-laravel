@@ -19,7 +19,8 @@
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
-        "doctrine/instantiator": "1.0.5"
+        "doctrine/instantiator": "1.0.5",
+        "barryvdh/laravel-ide-helper": "^2.3@dev"
     },
     "autoload": {
         "files": [
@@ -50,6 +51,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     }

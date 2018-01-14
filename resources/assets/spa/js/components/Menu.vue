@@ -48,9 +48,6 @@
         data(){
             return {
                 menus: [
-                    {name: 'Contas a pagar', dropdownId: 'teste'},
-                    {name: 'Contas a receber', routeName: 'auth.login'}
-                ],
                 menusDropdown: [
                     {
                         id: 'teste',

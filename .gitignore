@@ -11,3 +11,6 @@ _ide_helper.php
 /public/css
 /roboto
 resources/assets/spa/js/config.js
+/nbproject
+_ide_helper.php
+.phpstorm.meta.php
