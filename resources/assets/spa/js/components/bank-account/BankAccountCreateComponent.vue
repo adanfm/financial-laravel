@@ -17,10 +17,9 @@
 
 <script type="text/javascript">
     import BankAccountFormComponent from './BankAccountFormComponent.vue';
-
     export default {
         components: {
-            'form-component': BankAccountFormComponent
+            'form-component': BankAccountFormComponent,
         }
     };
 </script>
