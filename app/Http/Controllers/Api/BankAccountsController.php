@@ -32,7 +32,7 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        $bankAccounts = $this->repository->all();
+        $bankAccounts = $this->repository->paginate();
 
         return $bankAccounts;
     }
@@ -47,7 +47,7 @@ class BankAccountsController extends Controller
     public function store(BankAccountCreateRequest $request)
     {
         $bankAccount = $this->repository->create($request->all());
-        return response()->json($bankAccount->toArray(), 201);
+        return response()->json($bankAccount, 201);
     }
 
 
@@ -61,7 +61,7 @@ class BankAccountsController extends Controller
     public function show($id)
     {
         $bankAccount = $this->repository->find($id);
-        return response()->json($bankAccount->toArray());
+        return response()->json($bankAccount);
     }
 
     /**
@@ -75,7 +75,7 @@ class BankAccountsController extends Controller
     public function update(BankAccountUpdateRequest $request, $id)
     {
         $bankAccount = $this->repository->update($request->all(), $id);
-        return response()->json($bankAccount->toArray());
+        return response()->json($bankAccount);
 
     }
 

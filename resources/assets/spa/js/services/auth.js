@@ -37,9 +37,13 @@ export default {
         });
     },
     logout() {
+        let afterLogin = (response) => {
+            this.clearAuth();
+            return response;
+        }
         return JwtToken.revokeToken()
-            .then(this.clearAuth())
-            .catch(this.clearAuth)
+            .then(afterLogin)
+            .catch(afterLogin)
         ;
     },
     clearAuth() {

@@ -9,6 +9,10 @@
 // Materialize CSS
 @import "node_modules/materialize-css/sass/materialize";
 
+body {
+  background-color: color('green', 'lighten-5');
+}
+
 #app {
     display: flex;
     min-height: 100vh;
@@ -21,4 +25,16 @@
 
 main {
     flex: 1 0 auto;
+}
+
+.spinner {
+    @extend .progress;
+    margin: 0;
+}
+
+.spinner-fixed {
+    width: 100%;
+    position: fixed;
+    z-index: auto;
+    z-index: 998;
 }

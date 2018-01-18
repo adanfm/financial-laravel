@@ -1,13 +1,12 @@
 <template>
     <div class="container" id="login-panel">
         <div class="row">
-            <div class="col s6 offset-s3 z-depth-2">
+            <div class="card-panel col s6 offset-s3 z-depth-2">
                 <h5 class="center">Efetuando logout ...</h5>
 
                 <div class="progress">
                     <div class="indeterminate"></div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -25,8 +24,8 @@
             logout() {
                 let goToLogin = () => {this.$router.go({name: 'auth.login'})};
                 Auth.logout()
-                    .then(goToLogin())
-                    .catch(goToLogin());
+                    .then(goToLogin)
+                    .catch(goToLogin);
             }
         }
     }
