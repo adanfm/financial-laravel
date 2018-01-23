@@ -7,13 +7,18 @@
                 </span>
             </div>
             <div class="card-panel z-depth-5">
+                <search-component :model.sync="search" @on-submit="filter"></search-component>
                 <table class="bordered striped highlight centered responsive-table">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Agência</th>
-                        <th>C/C</th>
+                        <th v-for="(key, o) in table.headers" :width="o.width">
+                            <a href="#" @click.prevent="sortBy(key)">
+                                {{ o.label }}
+                                <i class="material-icons right" v-if="order.key == key">
+                                    {{ order.sort == 'asc' ? 'arrow_drop_up' : 'arrow_drop_down' }}
+                                </i>
+                            </a>
+                        </th>
                         <th>Ações</th>
                     </tr>
                     </thead>
@@ -45,11 +50,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <pagination-component: :per-page="10" :total-records="55"></pagination-component:>
+                <pagination-component:
+                        :per-page="pagination.per_page"
+                        :total-records="pagination.total"
+                        :current-page.sync="pagination.current_page"
+                ></pagination-component:>
             </div>
 
             <div class="fixed-action-btn">
-                <a href="#" class="btn-floating btn-large">
+                <a v-link="{name: 'bank-account.create'}" class="btn-floating btn-large">
                     <i class="large material-icons">add</i>
                 </a>
             </div>
@@ -62,16 +71,48 @@
     import BankAccountFormComponent from './BankAccountFormComponent.vue';
     import ModalComponent from '../../../../_default/components/Modal.vue';
     import PaginationComponent from '../Pagination.vue';
+    import SearchComponent from '../../../../_default/components/Search.vue';
 
     export default {
         components: {
             'form-component': BankAccountFormComponent,
             'modal-component': ModalComponent,
-            'pagination-component:': PaginationComponent
+            'pagination-component:': PaginationComponent,
+            'search-component': SearchComponent
         },
         data() {
             return {
-                bankAccounts: []
+                bankAccounts: [],
+                pagination: {
+                    current_page: 0,
+                    per_page: 0,
+                    total: 0
+                },
+                search: "",
+                order: {
+                    key: 'id',
+                    sort: 'asc'
+                },
+                table: {
+                    headers: {
+                        id: {
+                            label: '#',
+                            width: '10%'
+                        },
+                        name: {
+                            label: 'Nome',
+                            width: '45%'
+                        },
+                        agency: {
+                            label: 'Agência',
+                            width: '15%'
+                        },
+                        account: {
+                            label: 'C/C',
+                            width: '15%'
+                        }
+                    }
+                }
             }
         },
         created() {
@@ -89,9 +130,31 @@
                 ;
             },
             populateBankAccount(){
-                BankAccount.get().then((response) => {
+                BankAccount.query({
+                    page: this.pagination.current_page+1,
+                    orderBy: this.order.key,
+                    sortedBy: this.order.sort,
+                    search: this.search
+
+                }).then((response) => {
                     this.bankAccounts = response.data.data;
+                    let pagination = response.data.meta.pagination;
+                    pagination.current_page--;
+                    this.pagination = pagination;
                 });
+            },
+            sortBy(key) {
+                this.order.key = key;
+                this.order.sort = this.order.sort == 'desc' ? 'asc' : 'desc';
+                this.populateBankAccount();
+            },
+            filter() {
+                this.populateBankAccount();
+            }
+        },
+        events: {
+            'pagination::changed'(page) {
+                this.populateBankAccount();
             }
         }
     };

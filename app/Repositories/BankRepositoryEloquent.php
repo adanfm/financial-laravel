@@ -14,6 +14,10 @@ use Illuminate\Http\UploadedFile;
  */
 class BankRepositoryEloquent extends BaseRepository implements BankRepository
 {
+    protected $fieldSearchable = [
+        'name' => 'like',
+    ];
+
     public function create(array $attributes)
     {
         $logo = $attributes['logo'];
@@ -41,7 +45,6 @@ class BankRepositoryEloquent extends BaseRepository implements BankRepository
         return $model;
     }
 
-
     /**
      * Specify Model class name
      *
@@ -51,8 +54,6 @@ class BankRepositoryEloquent extends BaseRepository implements BankRepository
     {
         return Bank::class;
     }
-
-    
 
     /**
      * Boot up the repository, pushing criteria

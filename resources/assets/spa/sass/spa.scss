@@ -38,3 +38,15 @@ main {
     z-index: auto;
     z-index: 998;
 }
+
+.filter-group {
+    .btn {
+        float: right;
+        height: 3rem;
+        line-height: 3rem;
+    }
+    .filter-wrapper {
+        overflow: hidden;
+        padding-right: 10px;
+    }
+}

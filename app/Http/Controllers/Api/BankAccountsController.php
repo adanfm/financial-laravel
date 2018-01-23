@@ -2,6 +2,7 @@
 
 namespace CodeFin\Http\Controllers\Api;
 
+use CodeFin\Criteria\FindByNameCriteria;
 use Illuminate\Http\Request;
 use CodeFin\Http\Controllers\Controller;
 use CodeFin\Http\Requests;
@@ -32,7 +33,8 @@ class BankAccountsController extends Controller
      */
     public function index()
     {
-        $bankAccounts = $this->repository->paginate();
+        //$this->repository->pushCriteria(FindByNameCriteria::class);
+        $bankAccounts = $this->repository->paginate(8);
 
         return $bankAccounts;
     }

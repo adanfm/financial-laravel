@@ -27,7 +27,8 @@ class BankAccountTransformer extends TransformerAbstract
             'account'   =>  $model->account,
             'default'   =>  (bool) $model->default,
             'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'updated_at' => $model->updated_at,
+            'bank_id'   =>  $model->bank_id
         ];
     }
 }

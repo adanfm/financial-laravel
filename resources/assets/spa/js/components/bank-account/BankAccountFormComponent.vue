@@ -61,11 +61,12 @@
             });
 
             if (this.action == 'update') {
+                console.log(this.$route.params.id);
                 let id = this.$route.params.id;
                 BankAccount
                     .query({id:id})
                     .then((response) => {
-                        this.bankAccount = response.data;
+                        this.bankAccount = response.data.data;
                     });
             }
         },
