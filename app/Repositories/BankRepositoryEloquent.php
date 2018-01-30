@@ -3,6 +3,7 @@
 namespace CodeFin\Repositories;
 
 use CodeFin\Events\BankStoredEvent;
+use CodeFin\Presenters\BankPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeFin\Models\Bank;
@@ -22,12 +23,14 @@ class BankRepositoryEloquent extends BaseRepository implements BankRepository
     {
         $logo = $attributes['logo'];
         $attributes['logo'] = env('BANK_LOGO_DEFAULT');
+        $skipPresenter = $this->skipPresenter;
+        $this->skipPresenter(true);
         $model = parent::create($attributes);
 
         $event = new BankStoredEvent($model, $logo);
         event($event);
-
-        return $model;
+        $this->skipPresenter = $skipPresenter;
+        return $this->parserResult($model);
     }
 
     public function update(array $attributes, $id)
@@ -38,11 +41,15 @@ class BankRepositoryEloquent extends BaseRepository implements BankRepository
             unset($attributes['logo']);
         }
 
+        $skipPresenter = $this->skipPresenter;
+        $this->skipPresenter(true);
         $model = parent::update($attributes, $id);
         $event = new BankStoredEvent($model, $logo);
 
         event($event);
-        return $model;
+        $this->skipPresenter = $skipPresenter;
+
+        return $this->parserResult($model);
     }
 
     /**
@@ -61,5 +68,10 @@ class BankRepositoryEloquent extends BaseRepository implements BankRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return BankPresenter::class;
     }
 }

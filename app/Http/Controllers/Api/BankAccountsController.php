@@ -35,7 +35,6 @@ class BankAccountsController extends Controller
     {
         //$this->repository->pushCriteria(FindByNameCriteria::class);
         $bankAccounts = $this->repository->paginate(8);
-
         return $bankAccounts;
     }
 

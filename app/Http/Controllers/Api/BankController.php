@@ -23,6 +23,6 @@ class BankController extends Controller
 
     public function index()
     {
-        return response()->json(['data' => $this->repository->all()]);
+        return $this->repository->all();
     }
 }

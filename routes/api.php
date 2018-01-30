@@ -36,6 +36,6 @@ Route::group(['middleware' => 'cors', 'as ' => 'api.'], function(){
         })->name('user');
 
         Route::resource('/bank_accounts', 'Api\BankAccountsController', ['except' => ['create', 'edit']]);
-        Route::get('/banks', 'Api\BankController@index');
+        Route::resource('/banks', 'Api\BankController', ['only' => 'index']);
     });
 });

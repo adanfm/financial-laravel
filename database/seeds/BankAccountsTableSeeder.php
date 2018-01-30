@@ -12,6 +12,7 @@ class BankAccountsTableSeeder extends Seeder
     public function run()
     {
         $repository = app(\CodeFin\Repositories\BankRepository::class);
+        $repository->skipPresenter(true);
         $banks = $repository->all();
 
         $max = 15;
