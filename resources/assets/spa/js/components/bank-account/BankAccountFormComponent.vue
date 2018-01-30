@@ -19,9 +19,13 @@
                     id="bank-id"
                     placeholder="Procure o banco"
                     autocomplete="off"
+                    :value="bank.name"
                     data-activates="bank-id-dropdown"
                     data-beloworigin="true"
                 />
+                <input type="hidden" name="bank_id" id="bank-hidden"
+                       :value="bankAccount.bank_id"
+                >
                 <ul id="bank-id-dropdown" class="dropdown-content ac-dropdown">
                 </ul>
             </div>
@@ -68,6 +72,9 @@
                     bank_id: '',
                     'default': false
                 },
+                bank: {
+                    name: ''
+                },
                 banks: []
             }
         },
@@ -84,7 +91,15 @@
                     .query({id:id})
                     .then((response) => {
                         this.bankAccount = response.data.data;
-                    });
+                        Bank
+                            .query({id: this.bankAccount.bank_id})
+                            .then((response) => {
+                                this.bank.name = response.data.data.name;
+                            })
+                        ;
+                });
+
+
             }
         },
         methods: {
@@ -125,12 +140,14 @@
                         dropdown: {
                             el: '#bank-id-dropdown'
                         },
+                        hidden: {
+                            el: '#bank-hidden'
+                        },
                         getData(value, callback) {
                             let banks = self.filterBankByName(value);
                             banks = banks.map((o) => {
                                 return {id: o.id, text: o.name}
                             });
-
                             callback(value, banks);
                         },
                         onSelect(item) {

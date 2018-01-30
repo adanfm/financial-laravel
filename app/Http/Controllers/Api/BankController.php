@@ -25,4 +25,11 @@ class BankController extends Controller
     {
         return $this->repository->all();
     }
+
+    public function show($id)
+    {
+        $bank = $this->repository->find($id);
+        return response()->json($bank);
+    }
+
 }
