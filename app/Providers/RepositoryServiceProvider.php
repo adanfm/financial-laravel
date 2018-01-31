@@ -25,6 +25,8 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(\CodeFin\Repositories\BankRepository::class, \CodeFin\Repositories\BankRepositoryEloquent::class);
         $this->app->bind(\CodeFin\Repositories\BankAccountRepository::class, \CodeFin\Repositories\BankAccountRepositoryEloquent::class);
+        $this->app->bind(\CodeFin\Repositories\BillReceiveRepository::class, \CodeFin\Repositories\BillReceiveRepositoryEloquent::class);
+        $this->app->bind(\CodeFin\Repositories\BillPaysRepository::class, \CodeFin\Repositories\BillPaysRepositoryEloquent::class);
         //:end-bindings:
     }
 }
