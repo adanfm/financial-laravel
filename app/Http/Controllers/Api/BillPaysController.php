@@ -50,7 +50,14 @@ class BillPaysController extends Controller
      */
     public function store(BillPaysCreateRequest $request)
     {
-        $billPays = $this->repository->create($request->all());
+        $dataRequest = $request->all();
+
+        if (isset($dataRequest['date_due'])) {
+            $date = \DateTIme::createFromFormat('d/m/Y', $dataRequest['date_due']);
+            $dataRequest['date_due'] = $date->format('Y-m-d');
+        }
+
+        $billPays = $this->repository->create($dataRequest);
         return response()->json($billPays, 201);
     }
 
@@ -78,7 +85,14 @@ class BillPaysController extends Controller
      */
     public function update(BillPaysUpdateRequest $request, $id)
     {
-        $billPays = $this->repository->update($request->all(), $id);
+        $dataRequest = $request->all();
+
+        if (isset($dataRequest['date_due'])) {
+            $date = \DateTIme::createFromFormat('d/m/Y', $dataRequest['date_due']);
+            $dataRequest['date_due'] = $date->format('Y-m-d');
+        }
+
+        $billPays = $this->repository->update($dataRequest, $id);
         return response()->json($billPays);
     }
 

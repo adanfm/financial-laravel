@@ -4,12 +4,9 @@ require('materialize-css');
 window.Vue = require('vue');
 require('vue-resource');
 Vue.http.options.root = appConfig.api_url;
+require('./filters/filters');
 
 require('./services/interceptors');
 require('./router');
-/*
-    window.localStorage.setItem('nome','valor');
-    window.localStorage.setItem('nome','alterar_valor');
-    window.localStorage.clear();
-    window.localStorage.removeItem('nome');
-*/
+require('jquery-mask-plugin/dist/jquery.mask.min');
+require('../../_default/maks');

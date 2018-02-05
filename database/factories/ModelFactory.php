@@ -30,8 +30,26 @@ $factory->state(\CodeFin\Models\User::class, 'admin', function (Faker\Generator 
 
 $factory->define(\CodeFin\Models\BankAccount::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->city,
-        'agency' => rand(10000, 60000). '-' .rand(0,9),
-        'account' => $faker->bankAccountNumber,
+        'name'      =>  $faker->city,
+        'agency'    =>  rand(10000, 60000). '-' .rand(0,9),
+        'account'   =>  $faker->bankAccountNumber,
+    ];
+});
+
+$factory->define(\CodeFin\Models\BillPays::class, function (Faker\Generator $faker) {
+    return [
+        'name'      =>  $faker->name,
+        'date_due'  =>  $faker->date(),
+        'done'      =>  rand(0,1),
+        'value'     =>  $faker->numberBetween(10,1000),
+    ];
+});
+
+$factory->define(\CodeFin\Models\BillReceive::class, function (Faker\Generator $faker) {
+    return [
+        'name'      =>  $faker->name,
+        'date_due'  =>  $faker->date(),
+        'done'      =>  rand(0,1),
+        'value'     =>  $faker->numberBetween(10,1000),
     ];
 });

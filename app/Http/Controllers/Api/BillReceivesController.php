@@ -47,7 +47,14 @@ class BillReceivesController extends Controller
      */
     public function store(BillReceiveCreateRequest $request)
     {
-        $billReceives = $this->repository->create($request->all());
+        $dataRequest = $request->all();
+
+        if (isset($dataRequest['date_due'])) {
+            $date = \DateTIme::createFromFormat('d/m/Y', $dataRequest['date_due']);
+            $dataRequest['date_due'] = $date->format('Y-m-d');
+        }
+
+        $billReceives = $this->repository->create($dataRequest);
         return response()->json($billReceives, 201);
     }
 
@@ -75,7 +82,14 @@ class BillReceivesController extends Controller
      */
     public function update(BillReceiveUpdateRequest $request, $id)
     {
-        $billReceives = $this->repository->update($request->all(), $id);
+        $dataRequest = $request->all();
+
+        if (isset($dataRequest['date_due'])) {
+            $date = \DateTIme::createFromFormat('d/m/Y', $dataRequest['date_due']);
+            $dataRequest['date_due'] = $date->format('Y-m-d');
+        }
+
+        $billReceives = $this->repository->update($dataRequest, $id);
         return response()->json($billReceives);
     }
 

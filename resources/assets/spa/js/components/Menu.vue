@@ -48,7 +48,9 @@
         data(){
             return {
                 menus: [
-                    {name: 'Conta Bancária', routeName: 'bank-account.list'}
+                    {name: 'Conta Bancária', routeName: 'bank-account.list'},
+                    {name: 'Contas a Pagar', routeName: 'bill-pays.list'},
+                    {name: 'Contas a Receber', routeName: 'bill-receives.list'},
                 ],
                 menusDropdown: [],
                 user: Auth.user

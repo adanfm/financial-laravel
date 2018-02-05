@@ -23,7 +23,7 @@ class BillReceiveTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'name'       => $model->name,
-            'date_due'   => $model->date_due,
+            'date_due'   => (new \DateTime($model->date_due))->format('d/m/Y'),
             'value'      => $model->value,
             'done'       => (boolean) $model->done,
             'created_at' => $model->created_at,
