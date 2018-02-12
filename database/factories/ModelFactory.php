@@ -53,3 +53,9 @@ $factory->define(\CodeFin\Models\BillReceive::class, function (Faker\Generator $
         'value'     =>  $faker->numberBetween(10,1000),
     ];
 });
+
+$factory->define(\CodeFin\Models\Client::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name
+    ];
+});

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "50abed4a0c2bfcc821012d26e7480211",
+    "content-hash": "b831c7ce04ab85f4e7c2361d619f9e84",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -212,6 +212,64 @@
                 "string"
             ],
             "time": "2017-10-04T05:38:52+00:00"
+        },
+        {
+            "name": "hipsterjazzbo/landlord",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/HipsterJazzbo/Landlord.git",
+                "reference": "593a4fa6af9abcc5632f6a5e88ef2484906356bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/HipsterJazzbo/Landlord/zipball/593a4fa6af9abcc5632f6a5e88ef2484906356bb",
+                "reference": "593a4fa6af9abcc5632f6a5e88ef2484906356bb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.2.*|5.3.*|5.4.*|5.5.*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "laravel/framework": "5.2.*|5.3.*|5.4.*|5.5.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "5.5.*|6.0.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "HipsterJazzbo\\Landlord\\LandlordServiceProvider"
+                    ],
+                    "aliases": {
+                        "Landlord": "HipsterJazzbo\\Landlord\\Facades\\Landlord"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "HipsterJazzbo\\Landlord\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Fidecaro",
+                    "email": "calebfidecaro@gmail.com"
+                }
+            ],
+            "description": "A simple, single database multi-tenancy solution for Laravel 5.2+",
+            "keywords": [
+                "multitenancy",
+                "multitenant",
+                "tenancy",
+                "tenant"
+            ],
+            "time": "2018-01-07T22:05:53+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -4079,6 +4137,7 @@
     "stability-flags": {
         "tymon/jwt-auth": 20,
         "league/fractal": 20,
+        "hipsterjazzbo/landlord": 20,
         "barryvdh/laravel-ide-helper": 20
     },
     "prefer-stable": false,

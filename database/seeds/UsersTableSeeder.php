@@ -11,6 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $repository = app(\CodeFin\Repositories\ClientRepository::class);
+        $clients = $repository->all();
+
         factory(\CodeFin\Models\User::class, 1)
             ->states('admin')
             ->create([
@@ -19,12 +22,18 @@ class UsersTableSeeder extends Seeder
             ]);
         ;
 
-        factory(\CodeFin\Models\User::class, 1)
-            ->create([
-                'email' => 'client@user.com'
-            ])
-        ;
+        foreach (range(1, 50) as $value) {
+            factory(\CodeFin\Models\User::class, 1)
+                ->create([
+                    'name'  =>  "Client da Silva n $value",
+                    'email' =>  "client$value@user.com",
+                ])
+                ->each(function ($user) use($clients) {
+                    $client = $clients->random();
+                    $user->client()->associate($client);
+                    $user->save();
+                })
+            ;
+        }
     }
-
-
 }
