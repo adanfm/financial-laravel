@@ -18,7 +18,7 @@ class CreateBillPaysTable extends Migration
             $table->date('date_due');
             $table->string('name');
             $table->float('value');
-            $table->boolean('done')->default(false);
+            $table->boolean('done')->default(0);
             $table->timestamps();
 		});
 	}

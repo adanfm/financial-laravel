@@ -6,10 +6,10 @@ use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Class FindByLikeAgencyCriteriaCriteria
+ * Class FindRootCategoriesCriteriaCriteria
  * @package namespace CodeFin\Criteria;
  */
-class FindByLikeAgencyCriteria implements CriteriaInterface
+class FindRootCategoriesCriteria implements CriteriaInterface
 {
     /**
      * Apply criteria in query repository
@@ -21,6 +21,6 @@ class FindByLikeAgencyCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model;
+        return $model->whereIsRoot();
     }
 }
