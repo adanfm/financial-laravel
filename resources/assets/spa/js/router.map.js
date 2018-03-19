@@ -10,7 +10,9 @@ import BillReceivesUpdateComponent from './components/bill-receives/BillReceives
 import BillPaysListComponent from './components/bill-pays/BillPaysList.vue';
 import BillPaysCreateComponent from './components/bill-pays/BillPaysCreate.vue';
 import BillPaysUpdateComponent from './components/bill-pays/BillPaysUpdate.vue';
-import CategoryListComponent from './components/category/CategoryList.vue';
+import CategoryExpensesComponent from './components/category/CategoryExpenses.vue';
+import CategoryRevenuesComponent from './components/category/CategoryRevenues.vue';
+import {CategoryRevenues} from "./services/resources";
 
 export default {
     '/login': {
@@ -82,9 +84,14 @@ export default {
             }
         }
     },
-    '/categories': {
-        name: 'category.list',
-        component: CategoryListComponent,
+    '/category_expenses': {
+        name: 'category_expenses.list',
+        component: CategoryExpensesComponent,
+        auth:true
+    },
+    '/category_revenues': {
+        name: 'category_revenues.list',
+        component: CategoryRevenuesComponent,
         auth:true
     }
 }

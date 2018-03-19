@@ -60,7 +60,13 @@ $factory->define(\CodeFin\Models\Client::class, function (Faker\Generator $faker
     ];
 });
 
-$factory->define(\CodeFin\Models\Category::class, function (Faker\Generator $faker) {
+$factory->define(\CodeFin\Models\CategoryExpenses::class, function (Faker\Generator $faker) {
+    return  [
+        'name'  =>  $faker->name
+    ];
+});
+
+$factory->define(\CodeFin\Models\CategoryRevenues::class, function (Faker\Generator $faker) {
     return  [
         'name'  =>  $faker->name
     ];

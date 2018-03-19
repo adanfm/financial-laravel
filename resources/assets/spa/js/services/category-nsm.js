@@ -36,36 +36,37 @@ export class CategoryFormat
 
 export class CategoryService
 {
-    static save(category, parent, categories, categoryOriginal) {
+    static save(resource, category, parent, categories, categoryOriginal) {
         if (category.id === 0) {
-            return this.new(category,parent, categories);
+            return this.new(resource, category,parent, categories);
         }
-        return this.edit(category,parent,categories,categoryOriginal);
+        return this.edit(resource, category,parent,categories,categoryOriginal);
     }
 
-    static new(category, parent, categories){
+    static new(resource, category, parent, categories){
         let categoryCopy = $.extend(true, {}, category);
         if(categoryCopy.parent_id === null){
             delete categoryCopy.parent_id;
         }
-        return Category.save(categoryCopy).then((response) => {
+        return resource.save(categoryCopy).then((response) => {
             let categoryAdded = response.data.data;
             if(categoryAdded.parent_id === null){
                 categories.push(categoryAdded);
             }else{
+                console.log(parent);
                 parent.children.data.push(categoryAdded);
             }
             return response;
         });
     }
 
-    static edit(category, parent, categories, categoryOriginal){
+    static edit(resource, category, parent, categories, categoryOriginal){
         let categoryCopy = $.extend(true, {}, category);
         if(categoryCopy.parent_id === null){
             delete categoryCopy.parent_id;
         }
         let self = this;
-        return Category.update({id: categoryCopy.id}, categoryCopy).then((response) => {
+        return resource.update({id: categoryCopy.id}, categoryCopy).then((response) => {
             let categoryUpdated = response.data.data;
             if(categoryUpdated.parent_id === null){
                 if(parent){
@@ -103,8 +104,8 @@ export class CategoryService
         });
     }
 
-    static destroy(category,parent,categories){
-        return Category.delete({id: category.id}).then(response => {
+    static destroy(resource, category,parent,categories){
+        return resource.delete({id: category.id}).then(response => {
             if(parent){
                 parent.children.data.$remove(category);
             }else{
@@ -115,19 +116,20 @@ export class CategoryService
     }
 
     static _addChild(child, categories) {
-        let parent = this._findParent(child.parent_id,categories);
+        let parent = this._findParent(child.parent_id, categories);
         parent.children.data.push(child);
     }
 
     static _findParent(id, categories) {
+
         let result = null;
-        for(let category of categories) {
-            if(id == category.id) {
+        for (let category of categories) {
+            if (id == category.id) {
                 result = category;
                 break;
             }
             result = this._findParent(id, categories.children.data);
-            if(result !== null){
+            if (result !== null) {
                 break;
             }
         }

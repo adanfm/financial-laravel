@@ -12,20 +12,13 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use CodeFin\Http\Requests\CategoryRequest;
 use CodeFin\Repositories\CategoryRepository;
 
-class CategoriesController extends Controller
+abstract class CategoriesController extends Controller
 {
 
     /**
      * @var CategoryRepository
      */
     protected $repository;
-
-    public function __construct(CategoryRepository $repository)
-    {
-        $this->repository = $repository;
-        $this->repository->pushCriteria(new WithDepthCategoriesCriteria());
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -34,7 +27,6 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //$this->repository->pushCriteria(FindByNameCriteria::class);
         $this
             ->repository
             ->pushCriteria(new FindRootCategoriesCriteria())

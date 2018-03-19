@@ -49,7 +49,8 @@
             return {
                 menus: [
                     {name: 'Conta Bancária', routeName: 'bank-account.list'},
-                    {name: 'Categoria', routeName: 'category.list'},
+                    {name: 'Categoria (Despesas)', routeName: 'category_expenses.list'},
+                    {name: 'Categoria (Receita)', routeName: 'category_revenues.list'},
                     {name: 'Contas a Pagar', routeName: 'bill-pays.list'},
                     {name: 'Contas a Receber', routeName: 'bill-receives.list'},
                 ],

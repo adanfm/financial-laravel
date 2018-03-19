@@ -24,12 +24,24 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
+        //$this->getTable();
         $client = \Auth::guard('api')->user()->client;
         return [
             'name' => 'required|max:255',
-            'parent_id' => Rule::exists('categories', 'id')->where(function($query) use ($client){
+            'parent_id' => Rule::exists($this->getTable(), 'id')->where(function($query) use ($client){
                 $query->where('client_id', $client->id);
             })
         ];
+    }
+
+
+    private function getTable()
+    {
+        $currentAction = \Route::currentRouteAction();
+
+        list($controller) = explode('@', $currentAction);
+
+        return str_is("$controller*", \CodeFin\Http\Controllers\Api\CategoryRevenuesController::class)
+            ? "category_revenues" : "category_expenses";
     }
 }

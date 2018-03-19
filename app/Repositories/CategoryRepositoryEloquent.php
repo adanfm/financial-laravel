@@ -13,18 +13,8 @@ use CodeFin\Validators\CategoryValidator;
  * Class CategoryRepositoryEloquent
  * @package namespace CodeFin\Repositories;
  */
-class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
+abstract class CategoryRepositoryEloquent extends BaseRepository
 {
-    /**
-     * Specify Model class name
-     *
-     * @return string
-     */
-    public function model()
-    {
-        return Category::class;
-    }
-
     public function presenter()
     {
         return CategoryPresenter::class;
