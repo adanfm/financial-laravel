@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -9,6 +9,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/spa.css')  }}" rel="stylesheet" />
+
 </head>
 <body>
     <app></app>

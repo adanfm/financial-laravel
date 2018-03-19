@@ -2,8 +2,8 @@
 
 namespace CodeFin\Http\Controllers\Api;
 
-use CodeFin\Criteria\FindByNameCriteria;
 use CodeFin\Criteria\FindRootCategoriesCriteria;
+use CodeFin\Criteria\WithDepthCategoriesCriteria;
 use Illuminate\Http\Request;
 use CodeFin\Http\Controllers\Controller;
 use CodeFin\Http\Requests;
@@ -23,6 +23,7 @@ class CategoriesController extends Controller
     public function __construct(CategoryRepository $repository)
     {
         $this->repository = $repository;
+        $this->repository->pushCriteria(new WithDepthCategoriesCriteria());
     }
 
 
@@ -34,8 +35,11 @@ class CategoriesController extends Controller
     public function index()
     {
         //$this->repository->pushCriteria(FindByNameCriteria::class);
-        $this->repository->pushCriteria(new FindRootCategoriesCriteria());
-        $categories = $this->repository->paginate();
+        $this
+            ->repository
+            ->pushCriteria(new FindRootCategoriesCriteria())
+        ;
+        $categories = $this->repository->all();
         return $categories;
     }
 
@@ -48,7 +52,10 @@ class CategoriesController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = $this->repository->create($request->all());
+        $category = $this->repository->skipPresenter()->create($request->all());
+        $this->repository->skipPresenter(false);
+        $category = $this->repository->find($category->id);
+
         return response()->json($category, 201);
     }
 
@@ -76,7 +83,9 @@ class CategoriesController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $category = $this->repository->update($request->all(), $id);
+        $category = $this->repository->skipPresenter()->update($request->all(), $id);
+        $this->repository->skipPresenter(false);
+        $category = $this->repository->find($category->id);
         return response()->json($category);
 
     }

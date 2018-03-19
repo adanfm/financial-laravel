@@ -10,6 +10,7 @@ import BillReceivesUpdateComponent from './components/bill-receives/BillReceives
 import BillPaysListComponent from './components/bill-pays/BillPaysList.vue';
 import BillPaysCreateComponent from './components/bill-pays/BillPaysCreate.vue';
 import BillPaysUpdateComponent from './components/bill-pays/BillPaysUpdate.vue';
+import CategoryListComponent from './components/category/CategoryList.vue';
 
 export default {
     '/login': {
@@ -81,4 +82,9 @@ export default {
             }
         }
     },
+    '/categories': {
+        name: 'category.list',
+        component: CategoryListComponent,
+        auth:true
+    }
 }
